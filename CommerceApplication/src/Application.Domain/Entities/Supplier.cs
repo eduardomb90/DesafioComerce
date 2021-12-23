@@ -1,24 +1,48 @@
-﻿using System;
+﻿using Application.Domain.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Domain.Entities
 {
-    public abstract class Supplier : BaseEntity
+    public class Supplier : BaseEntity
     {
         public bool Active { get; private set; }
-        public DateTime InserDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
-        
-        
-        public virtual ICollection<Phone > Phones { get; private set; }
-        public virtual ICollection<Product> Products { get; private set; }
+
+
+        private List<Phone> _phones;
+        public IReadOnlyCollection<Phone> Phones => _phones;
+        public ICollection<Product> Products { get; private set; }
 
         //ForeignKeys
         public Guid AddressId { get; private set; }
-        public virtual Address Address { get; private set; }
+        public Address Address { get; private set; }
 
         public Guid EmailId { get; private set; }
-        public virtual Email Email { get; private set; }
+        public Email Email { get; private set; }
+
+
+        protected Supplier()
+        {
+        }
+
+        protected Supplier(Address address, Email email, string ddd, string phoneNumber)
+        {
+            Address = address;
+            Email = email;
+
+            AddPhone(ddd, phoneNumber);
+        }
+
+
+
+        //Methods
+        public void AddPhone(string ddd, string phoneNumber)
+        {
+            if (Phones.Count == 3)
+                throw new DomainException("Maximo de 3 telefones por fornecedor.");
+
+            _phones.Add(new Phone(ddd, phoneNumber, this));
+        }
     }
 }

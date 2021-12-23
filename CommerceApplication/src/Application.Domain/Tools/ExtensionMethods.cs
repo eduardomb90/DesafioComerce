@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Domain.Extensions
+namespace Application.Domain.Tools
 {
-    public static class CnpjCpfExtensionMethods
+    public static class ExtensionMethods
     {
 		public static bool IsCnpj(this string cnpj)
 		{

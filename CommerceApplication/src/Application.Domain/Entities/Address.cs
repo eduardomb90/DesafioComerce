@@ -14,11 +14,14 @@ namespace Application.Domain.Entities
         public string Neighborhood { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
-        public DateTime InserDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        
 
         //Foreign Key
         public Guid SupplierId { get; private set; }
-        public virtual Supplier Supplier { get; private set; }
+        public Supplier Supplier { get; private set; }
+
+        protected Address()
+        {
+        }
     }
 }

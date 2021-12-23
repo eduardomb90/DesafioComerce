@@ -18,17 +18,15 @@ namespace Application.Data.ContextConfiguration
 
             builder.HasOne(x => x.Address)
                 .WithOne(x => x.Supplier)
-                .HasForeignKey("AddressId")
-                .IsRequired();            
-            
+                .HasForeignKey<Supplier>(x => x.AddressId)
+                .IsRequired();
+
             builder.HasOne(x => x.Email)
                 .WithOne(x => x.Supplier)
-                .HasForeignKey("EmailId")
+                .HasForeignKey<Supplier>(x => x.EmailId)
                 .IsRequired();
-            builder.Property(x => x.Email)
-                .HasColumnType("varchar(100)");
 
-            builder.Property(x => x.InserDate)
+            builder.Property(x => x.InsertDate)
                 .IsRequired()
                 .HasColumnType("date");
         }

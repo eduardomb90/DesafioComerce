@@ -7,8 +7,7 @@ namespace Application.Domain.Entities
     public class Image : BaseEntity
     {
         public string ImagePath { get; private set; }
-        public DateTime InsertDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+       
 
 
         //ForeignKey
