@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Domain.Interfaces
+namespace Application.Domain.Interfaces.Services
 {
     public interface INotifierService
     {

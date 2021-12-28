@@ -13,5 +13,9 @@ namespace Application.Domain.Entities
         //ForeignKey
         public Guid ProductId { get; private set; }
         public Product Product { get; private set; }
+
+        protected Image()
+        {
+        }
     }
 }

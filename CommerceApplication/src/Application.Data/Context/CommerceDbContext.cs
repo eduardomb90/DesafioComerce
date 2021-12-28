@@ -14,7 +14,15 @@ namespace Application.Data.Context
         }
 
         //DbSets
-
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Email> Emails { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Phone> Phones { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<SupplierJuridical> SupplierJuridicals { get; set; }
+        public DbSet<SupplierPhysical> SupplierPhysicals { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,7 +33,7 @@ namespace Application.Data.Context
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
                 relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
-            modelBuilder.Entity<Supplier>().ToTable("Supplier");
+            // modelBuilder.Entity<Supplier>().ToTable("Supplier");
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CommerceDbContext).Assembly);
         }

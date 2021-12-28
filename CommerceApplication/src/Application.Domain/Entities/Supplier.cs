@@ -14,11 +14,9 @@ namespace Application.Domain.Entities
         public IReadOnlyCollection<Phone> Phones => _phones;
         public ICollection<Product> Products { get; private set; }
 
-        //ForeignKeys
-        public Guid AddressId { get; private set; }
-        public Address Address { get; private set; }
 
-        public Guid EmailId { get; private set; }
+        //ForeignKeys na classe menor
+        public Address Address { get; private set; }
         public Email Email { get; private set; }
 
 

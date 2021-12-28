@@ -12,10 +12,16 @@ namespace Application.Data.ContextConfiguration
         public void Configure(EntityTypeBuilder<Phone> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Ddd)
+                .IsRequired();
+            builder.Property(x => x.Number)
+                .IsRequired();
 
-            builder.HasOne(x => x.Supplier)
-                .WithMany(x => x.Phones);
-
+            builder.Property(x => x.InsertDate)
+                .IsRequired()
+                .HasColumnType("date");
+            builder.Property(x => x.UpdateDate)
+                .HasColumnType("date");
         }
     }
 }

@@ -26,7 +26,8 @@ namespace Application.Web.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<CommerceDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("IdentityContext")));
+            services.AddDbContext<CommerceDbContext>(option => option
+                                    .UseSqlServer(Configuration.GetConnectionString("CommerceDbContext")));
 
         }
 

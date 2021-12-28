@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.Data.Migrations
 {
     [DbContext(typeof(CommerceDbContext))]
-    [Migration("20211223192449_CommerceInitial")]
-    partial class CommerceInitial
+    [Migration("20211227175538_InitalCommerceDb")]
+    partial class InitalCommerceDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,41 +28,59 @@ namespace Application.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<string>("Complement")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("Neighborhood")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Reference")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<string>("Street")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<Guid>("SupplierId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(9)")
+                        .HasMaxLength(8);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.HasIndex("SupplierId")
+                        .IsUnique();
+
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Application.Domain.Entities.Category", b =>
@@ -75,17 +93,18 @@ namespace Application.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(256)");
 
                     b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Application.Domain.Entities.Email", b =>
@@ -95,20 +114,25 @@ namespace Application.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(256)")
+                        .HasMaxLength(150);
 
                     b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<Guid>("SupplierId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Email");
+                    b.HasIndex("SupplierId")
+                        .IsUnique();
+
+                    b.ToTable("Emails");
                 });
 
             modelBuilder.Entity("Application.Domain.Entities.Image", b =>
@@ -118,7 +142,7 @@ namespace Application.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("datetime2");
@@ -133,7 +157,7 @@ namespace Application.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Application.Domain.Entities.Phone", b =>
@@ -143,25 +167,27 @@ namespace Application.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Ddd")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(256)");
 
                     b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(256)");
 
                     b.Property<Guid>("SupplierId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Phone");
+                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("Application.Domain.Entities.Product", b =>
@@ -174,16 +200,20 @@ namespace Application.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("BarCode")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(250)")
+                        .HasMaxLength(250);
 
                     b.Property<decimal>("PricePurchase")
                         .HasColumnType("decimal(18,2)");
@@ -198,7 +228,7 @@ namespace Application.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -206,7 +236,7 @@ namespace Application.Data.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Application.Domain.Entities.Supplier", b =>
@@ -218,27 +248,76 @@ namespace Application.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EmailId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("varchar(256)");
 
                     b.Property<DateTime>("InsertDate")
                         .HasColumnType("date");
 
                     b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId")
-                        .IsUnique();
+                    b.ToTable("Suppliers");
 
-                    b.HasIndex("EmailId")
-                        .IsUnique();
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Supplier");
+                });
 
-                    b.ToTable("Supplier");
+            modelBuilder.Entity("Application.Domain.Entities.SupplierJuridical", b =>
+                {
+                    b.HasBaseType("Application.Domain.Entities.Supplier");
+
+                    b.Property<string>("Cnpj")
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("FantasyName")
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<DateTime>("OpenDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasDiscriminator().HasValue("SupplierJuridical");
+                });
+
+            modelBuilder.Entity("Application.Domain.Entities.SupplierPhysical", b =>
+                {
+                    b.HasBaseType("Application.Domain.Entities.Supplier");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("FantasyName")
+                        .HasColumnName("SupplierPhysical_FantasyName")
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("varchar(256)");
+
+                    b.HasDiscriminator().HasValue("SupplierPhysical");
+                });
+
+            modelBuilder.Entity("Application.Domain.Entities.Address", b =>
+                {
+                    b.HasOne("Application.Domain.Entities.Supplier", "Supplier")
+                        .WithOne("Address")
+                        .HasForeignKey("Application.Domain.Entities.Address", "SupplierId")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Application.Domain.Entities.Email", b =>
+                {
+                    b.HasOne("Application.Domain.Entities.Supplier", "Supplier")
+                        .WithOne("Email")
+                        .HasForeignKey("Application.Domain.Entities.Email", "SupplierId")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Application.Domain.Entities.Image", b =>
@@ -246,7 +325,6 @@ namespace Application.Data.Migrations
                     b.HasOne("Application.Domain.Entities.Product", "Product")
                         .WithMany("Images")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -255,7 +333,6 @@ namespace Application.Data.Migrations
                     b.HasOne("Application.Domain.Entities.Supplier", "Supplier")
                         .WithMany("Phones")
                         .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -264,28 +341,11 @@ namespace Application.Data.Migrations
                     b.HasOne("Application.Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Application.Domain.Entities.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Application.Domain.Entities.Supplier", b =>
-                {
-                    b.HasOne("Application.Domain.Entities.Address", "Address")
-                        .WithOne("Supplier")
-                        .HasForeignKey("Application.Domain.Entities.Supplier", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Application.Domain.Entities.Email", "Email")
-                        .WithOne("Supplier")
-                        .HasForeignKey("Application.Domain.Entities.Supplier", "EmailId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

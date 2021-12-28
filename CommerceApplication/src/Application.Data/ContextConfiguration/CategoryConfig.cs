@@ -1,19 +1,23 @@
 ﻿using Application.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Data.ContextConfiguration
 {
-    public class EmailConfig : IEntityTypeConfiguration<Email>
+    public class CategoryConfig : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Email> builder)
+        public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.Property(x => x.EmailAddress)
-                .HasMaxLength(150)
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Name)
                 .IsRequired();
+            builder.Property(x => x.Active)
+                .IsRequired();
+
+            builder.HasMany(x => x.Products)
+                .WithOne(x => x.Category)
+                .HasForeignKey(x => x.CategoryId);
 
             builder.Property(x => x.InsertDate)
                 .IsRequired()

@@ -6,9 +6,7 @@ namespace Application.Domain.Entities
 {
     public class Product : BaseEntity
     {
-        public string Name { get; private set; }
-        public DateTime InsertDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        public string Name { get; private set; }       
         public string BarCode { get; private set; }
         public int QuantityStock { get; private set; }
         public bool Active { get; private set; }
@@ -17,6 +15,7 @@ namespace Application.Domain.Entities
 
 
         public virtual ICollection<Image> Images { get; set; }
+
 
         //ForeignKey
         public Guid SupplierId { get; private set; }

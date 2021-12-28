@@ -1,9 +1,6 @@
 ﻿using Application.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Data.ContextConfiguration
 {
@@ -17,17 +14,19 @@ namespace Application.Data.ContextConfiguration
                 .IsRequired();
 
             builder.HasOne(x => x.Address)
-                .WithOne(x => x.Supplier)
-                .HasForeignKey<Supplier>(x => x.AddressId)
-                .IsRequired();
+                .WithOne(x => x.Supplier);
 
             builder.HasOne(x => x.Email)
+                .WithOne(x => x.Supplier);
+
+            builder.HasMany(x => x.Phones)
                 .WithOne(x => x.Supplier)
-                .HasForeignKey<Supplier>(x => x.EmailId)
-                .IsRequired();
+                .HasForeignKey(x => x.SupplierId);
 
             builder.Property(x => x.InsertDate)
                 .IsRequired()
+                .HasColumnType("date");
+            builder.Property(x => x.UpdateDate)
                 .HasColumnType("date");
         }
     }

@@ -12,6 +12,18 @@ namespace Application.Domain.Entities
         public string Cnpj { get; private set; }
         public DateTime OpenDate { get; private set; }
 
+        protected SupplierJuridical()
+        {
+        }
+
+        public SupplierJuridical(string companyName, string fantasyName, string cnpj, DateTime openDate)
+        {
+            CompanyName = companyName;
+            FantasyName = fantasyName;
+            Cnpj = cnpj;
+            OpenDate = openDate;
+        }
+
         public bool IsValid()
         {
             return Cnpj.IsCnpj();

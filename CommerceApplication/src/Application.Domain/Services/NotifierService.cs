@@ -1,9 +1,7 @@
-﻿using Application.Domain.Interfaces;
+﻿using Application.Domain.Interfaces.Services;
 using Application.Domain.Notifier;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Application.Domain.Services
 {
