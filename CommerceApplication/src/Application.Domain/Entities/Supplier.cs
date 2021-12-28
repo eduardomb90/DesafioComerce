@@ -10,7 +10,7 @@ namespace Application.Domain.Entities
         public bool Active { get; private set; }
 
 
-        private List<Phone> _phones;
+        private List<Phone> _phones = new List<Phone>();
         public IReadOnlyCollection<Phone> Phones => _phones;
         public ICollection<Product> Products { get; private set; }
 

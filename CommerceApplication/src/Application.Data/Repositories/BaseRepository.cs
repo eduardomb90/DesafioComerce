@@ -12,7 +12,7 @@ namespace Application.Data.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
-        private readonly CommerceDbContext _commerceDbContext;
+        protected readonly CommerceDbContext _commerceDbContext;
 
         public BaseRepository(CommerceDbContext commerceDbContext)
         {
@@ -33,18 +33,21 @@ namespace Application.Data.Repositories
         public async Task Insert(TEntity entity)
         {
             _commerceDbContext.Set<TEntity>().Add(entity);
+            await _commerceDbContext.SaveChangesAsync();
             await Task.CompletedTask;
         }
 
         public async Task Remove(TEntity entity)
         {
             _commerceDbContext.Set<TEntity>().Remove(entity);
+            await _commerceDbContext.SaveChangesAsync();
             await Task.CompletedTask;
         }
 
         public async Task Update(TEntity entity)
         {
             _commerceDbContext.Set<TEntity>().Update(entity);
+            await _commerceDbContext.SaveChangesAsync();
             await Task.CompletedTask;
         }
 

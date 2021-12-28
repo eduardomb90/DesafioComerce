@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SupplierViewModel>
+
+@{ 
+    ViewData["Title"] = "Suppliers";
+}
+
+<h1>Suppliers</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <a asp-action="Create" class="btn btn-primary">New Physical</a>
+        </div>
+    </div>
+</div>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Email
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    
+                    @*<td>
+                        <a asp-action="Edit" asp-controller="Movie" asp-route-id="@item.Id"
+                           class="btn btn-warning" title="Edit">
+                            <span class="fas fa-edit">Edit</span>
+                        </a>
+                        <a asp-action="Details" asp-controller="Movie" asp-route-id="@item.Id"
+                           class="btn btn-primary" title="Details">
+                            <span class="fas fa-edit">Details</span>
+                        </a>
+                        <a asp-action="Delete" asp-controller="Movie" asp-route-id="@item.Id"
+                           class="btn btn-danger" title="Delete">
+                            <span class="fas fa-edit">Delete</span>
+                        </a>
+                    </td>*@
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>

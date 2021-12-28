@@ -21,9 +21,20 @@ namespace Application.Domain.Services
             _supplierRepository = supplierRepository;
         }
 
-        public async Task AddSupplier()
+        public async Task<Supplier> GetSupplierById(Guid Id)
         {
+            return await _supplierRepository.GetSupplierById(Id);
+        }
 
+        public async Task<IEnumerable<Supplier>> GetSuppliers()
+        {
+            return await _supplierRepository.GetSuppliers();
+        }
+
+        public async Task AddSupplier(Supplier supplier)
+        {
+            await _supplierRepository.Insert(supplier);
+            await Task.CompletedTask;
         }
 
         private bool RunValidation<TV, TE>(TV validator, TE validate) where TV : AbstractValidator<TV> where TE : BaseEntity
