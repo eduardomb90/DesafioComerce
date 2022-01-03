@@ -7,7 +7,7 @@
 <div class="tab">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item active" role="presentation">
-            <button class="tablinks nav-link"  onclick="openCity(event, 'Physical')">Physical</button>
+            <button class="tablinks nav-link" onclick="openCity(event, 'Physical')">Physical</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="tablinks nav-link" onclick="openCity(event, 'Juridical')">Juridical</button>
@@ -18,9 +18,17 @@
 
 <div id="Physical" class="tabcontent active">
     <h2>Physical</h2>
-    <form asp-action="Create">
+    <form asp-action="Edit">
+            <input asp-for="Id" hidden>
+            <input asp-for="Address.SupplierId" hidden>
+            <input asp-for="Email.SupplierId" hidden>
+            <input asp-for="CellPhone.SupplierId" hidden>
+            <input asp-for="HomePhone.SupplierId" hidden>
+            <input asp-for="Phone.SupplierId" hidden>
+        
         <div>
             <input type="text" asp-for="Type" value="1" hidden>
+
             <div class="mb-3">
                 <label asp-for="FullName" class="form-label"></label>
                 <input asp-for="FullName" class="form-control">
@@ -43,6 +51,7 @@
             </div>
         </div>
 
+        <input asp-for="Email.Id" hidden>
         <div class="mb-3">
             <label asp-for="Email.EmailAddress" class="form-label"></label>
             <input asp-for="Email.EmailAddress" class="form-control">
@@ -52,6 +61,7 @@
         <br />
         <div>
             <h3>Address</h3>
+            <input asp-for="Address.Id" hidden>
             <div class="mb-3">
                 <label asp-for="Address.Street" class="form-label"></label>
                 <input asp-for="Address.Street" class="form-control">
@@ -95,32 +105,51 @@
 
             <div>
                 <h3>Phones</h3>
+                <input asp-for="CellPhone.Id" hidden>
                 <div class="mb-3">
-                    <label asp-for="CellPhone" class="form-label"></label>
-                    <input asp-for="CellPhone" class="form-control">
-                    <span asp-validation-for="CellPhone" class="text-danger"></span>
+                    <label asp-for="CellPhone.Ddd" class="form-label"></label>
+                    <input asp-for="CellPhone.Ddd" class="form-control">
+                    <span asp-validation-for="CellPhone.Ddd" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="HomePhone" class="form-label"></label>
-                    <input asp-for="HomePhone" class="form-control">
-                    <span asp-validation-for="HomePhone" class="text-danger"></span>
+                    <label asp-for="CellPhone.Number" class="form-label"></label>
+                    <input asp-for="CellPhone.Number" class="form-control">
+                    <span asp-validation-for="CellPhone.Number" class="text-danger"></span>
+                </div>
+                <input asp-for="HomePhone.Id" hidden>
+                <div class="mb-3">
+                    <label asp-for="HomePhone.Ddd" class="form-label"></label>
+                    <input asp-for="HomePhone.Ddd" class="form-control">
+                    <span asp-validation-for="HomePhone.Ddd" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Phone" class="form-label"></label>
-                    <input asp-for="Phone" class="form-control">
-                    <span asp-validation-for="Phone" class="text-danger"></span>
+                    <label asp-for="HomePhone.Number" class="form-label"></label>
+                    <input asp-for="HomePhone.Number" class="form-control">
+                    <span asp-validation-for="HomePhone.Number" class="text-danger"></span>
+                </div>
+                <input asp-for="Phone.Id" hidden>
+                <div class="mb-3">
+                    <label asp-for="Phone.Ddd" class="form-label"></label>
+                    <input asp-for="Phone.Ddd" class="form-control">
+                    <span asp-validation-for="Phone.Ddd" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Phone.Number" class="form-label"></label>
+                    <input asp-for="Phone.Number" class="form-control">
+                    <span asp-validation-for="Phone.Number" class="text-danger"></span>
                 </div>
             </div>
 
         </div>
-        <button type="submit" value="Create" class="btn btn-primary">Submit</button>
+        <button type="submit" value="Edit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
 <div id="Juridical" class="tabcontent" style="display:none">
     <h2>Juridical</h2>
-    <form asp-action="Create">
+    <form asp-action="Edit">
         <div>
+            <input asp-for="Id" hidden>
             <input type="text" asp-for="Type" value="2" hidden>
 
             <div class="mb-3">
@@ -215,7 +244,7 @@
             </div>
 
         </div>
-        <button type="submit" value="Create" class="btn btn-primary">Submit</button>
+        <button type="submit" value="Edit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 

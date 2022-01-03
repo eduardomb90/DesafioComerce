@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Application.Data.Migrations
 {
-    public partial class InitalCommerceDb : Migration
+    public partial class InitialDbCommerce : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,6 +103,7 @@ namespace Application.Data.Migrations
                     UpdateDate = table.Column<DateTime>(type: "date", nullable: false),
                     Ddd = table.Column<string>(type: "varchar(256)", nullable: false),
                     Number = table.Column<string>(type: "varchar(256)", nullable: false),
+                    Type = table.Column<int>(nullable: false),
                     SupplierId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>

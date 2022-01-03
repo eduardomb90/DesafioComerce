@@ -9,7 +9,7 @@ namespace Application.Data.Context
 {
     public class CommerceDbContext : DbContext
     {
-        public CommerceDbContext(DbContextOptions options) : base(options)
+        public CommerceDbContext(DbContextOptions<CommerceDbContext> options) : base(options)
         {
         }
 
@@ -38,7 +38,7 @@ namespace Application.Data.Context
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CommerceDbContext).Assembly);
         }
 
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entity in ChangeTracker.Entries().Where(x => x.Entity.GetType().GetProperty("InsertDate") != null &&
                                                                       x.Entity.GetType().GetProperty("UpdateDate") != null))
@@ -56,7 +56,7 @@ namespace Application.Data.Context
                 }
             }
 
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

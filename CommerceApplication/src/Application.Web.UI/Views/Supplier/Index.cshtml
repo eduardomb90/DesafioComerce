@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SupplierViewModel>
+﻿@model PaginationViewModel<SupplierViewModel>
 
 @{ 
     ViewData["Title"] = "Suppliers";
@@ -19,6 +19,12 @@
         <thead>
             <tr>
                 <th>
+                    Nome
+                </th>
+                <th>
+                    Identificação
+                </th>
+                <th>
                     Email
                 </th>
             </tr>
@@ -26,30 +32,51 @@
 
         <tbody>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.List)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    
-                    @*<td>
-                        <a asp-action="Edit" asp-controller="Movie" asp-route-id="@item.Id"
-                           class="btn btn-warning" title="Edit">
-                            <span class="fas fa-edit">Edit</span>
-                        </a>
-                        <a asp-action="Details" asp-controller="Movie" asp-route-id="@item.Id"
-                           class="btn btn-primary" title="Details">
-                            <span class="fas fa-edit">Details</span>
-                        </a>
-                        <a asp-action="Delete" asp-controller="Movie" asp-route-id="@item.Id"
-                           class="btn btn-danger" title="Delete">
-                            <span class="fas fa-edit">Delete</span>
-                        </a>
-                    </td>*@
-                </tr>
+            <tr>
+
+                @if (item.Cpf != null)
+                {
+                    @Html.Raw("<td>")
+                    @Html.DisplayFor(modelItem => item.FullName)
+                    @Html.Raw("</td>")
+                    @Html.Raw("<td>")
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                    @Html.Raw("</td>")
+                }
+                else
+                {
+                    @Html.Raw("<td>")
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                    @Html.Raw("</td>")
+                    @Html.Raw("<td>")
+                    @Html.DisplayFor(modelItem => item.Cnpj)
+                    @Html.Raw("</td>")
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email.EmailAddress)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-controller="Supplier" asp-route-id="@item.Id"
+                       class="btn btn-warning" title="Edit">
+                        <span class="fas fa-edit">Edit</span>
+                    </a>
+                    <a asp-action="Details" asp-controller="Supplier" asp-route-id="@item.Id"
+                       class="btn btn-primary" title="Details">
+                        <span class="fas fa-edit">Details</span>
+                    </a>
+                    <a asp-action="Delete" asp-controller="Supplier" asp-route-id="@item.Id"
+                       class="btn btn-danger" title="Delete">
+                        <span class="fas fa-edit">Delete</span>
+                    </a>
+                </td>
+            </tr>
 
             }
         </tbody>
     </table>
 </div>
+
+<vc:pagination model-pagination="@Model"></vc:pagination>

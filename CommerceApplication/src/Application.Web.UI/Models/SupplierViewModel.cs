@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Web.UI.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,12 +9,18 @@ namespace Application.Web.UI.Models
     {
         [ScaffoldColumn(false)]
         public Guid Id { get; set; }
+        [ScaffoldColumn(false)]
+        public SupplierType Type { get; set; }
+
         public bool Active { get; set; }
         public AddressViewModel Address { get; set; }
         public EmailViewModel Email { get; set; }
-        public string CellPhone { get; set; }
-        public string HomePhone { get; set; }
-        public string Phone { get; set; }
+        
+        
+        public PhoneViewModel CellPhone { get; set; }
+        public PhoneViewModel HomePhone { get; set; }
+        public PhoneViewModel Phone { get; set; }
+        
         
         public string FantasyName { get; set; }
 

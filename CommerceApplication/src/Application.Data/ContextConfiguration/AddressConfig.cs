@@ -12,6 +12,7 @@ namespace Application.Data.ContextConfiguration
 
             builder.HasOne(x => x.Supplier)
                 .WithOne(x => x.Address);
+                //.OnDelete(DeleteBehavior.SetNull);
 
             builder.Property(x => x.ZipCode)
                 .IsRequired()

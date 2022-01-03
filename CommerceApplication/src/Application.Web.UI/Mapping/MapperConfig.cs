@@ -16,6 +16,7 @@ namespace Application.Web.UI.Mapping
             CreateMap<SupplierViewModel, SupplierJuridical>().ReverseMap();
             CreateMap<AddressViewModel, Address>().ReverseMap();
             CreateMap<EmailViewModel, Email>().ReverseMap();
+            CreateMap<PhoneViewModel, Phone>().ReverseMap();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Application.Domain.Entities;
+using Application.Domain.Entities.DTO;
+using Application.Domain.Entities.Pagination;
 using Application.Domain.Interfaces;
 using Application.Domain.Interfaces.Repositories;
 using Application.Domain.Interfaces.Services;
@@ -26,14 +28,90 @@ namespace Application.Domain.Services
             return await _supplierRepository.GetSupplierById(Id);
         }
 
+        public async Task<PaginationViewModel<Supplier>> Pagination(int PageSize, int PageIndex, string query)
+        {
+            return await _supplierRepository.Pagination(PageSize, PageIndex, query);
+        }
+
+        public async Task<Supplier> FindById(Guid Id)
+        {
+            return await _supplierRepository.FindById(Id);
+        }
+
         public async Task<IEnumerable<Supplier>> GetSuppliers()
         {
             return await _supplierRepository.GetSuppliers();
         }
 
-        public async Task AddSupplier(Supplier supplier)
+        public async Task AddSupplier(SupplierDTO entity)
         {
-            await _supplierRepository.Insert(supplier);
+            if (entity.Juridical != null)
+            {
+                await _supplierRepository.Insert(entity.Juridical);
+            }
+            else
+            {
+                await _supplierRepository.Insert(entity.Physical);
+            }
+            await _supplierRepository.SaveChangesAsync();
+            await Task.CompletedTask;
+        }
+
+        public async Task Update(SupplierDTO entity)
+        {
+            var result = _supplierRepository.GetSupplierById(entity.Physical == null ? entity.Juridical.Id : entity.Physical.Id);
+
+            if (entity.Juridical != null)
+            {
+                await _supplierRepository.UpdateAddress(entity.Juridical.Address);
+                await _supplierRepository.UpdateEmail(entity.Juridical.Email);
+
+
+                foreach (var phone in entity.Juridical.Phones)
+                {
+                    await _supplierRepository.UpdatePhone(phone);
+                }
+
+                await _supplierRepository.Update(entity.Juridical);
+            }
+            else
+            {
+                //await _supplierRepository.UpdateAddress(entity.Physical.Address);
+                //await _supplierRepository.UpdateEmail(entity.Physical.Email);
+
+                //foreach (var phone in entity.Physical.Phones)
+                //{
+                //    await _supplierRepository.UpdatePhone(phone);
+                //}
+
+                //await _supplierRepository.Update(entity.Physical);
+                await _supplierRepository.UpdateSupplier(entity.Physical);
+            }
+
+            await _supplierRepository.SaveChangesAsync();
+            await Task.CompletedTask;
+        }
+
+        public async Task Remove(Guid Id)
+        {
+            var result = await _supplierRepository.GetSupplierById(Id);
+
+            if (result == null) return;
+
+            //Primeiro remove todos as entidades que estao relacionadas ao supplier.
+            if (result.Address != null)
+                await _supplierRepository.RemoveAddress(result.Address);
+
+            if (result.Email != null)
+                await _supplierRepository.RemoveEmail(result.Email);
+
+            foreach (var phone in result.Phones)
+            {
+                await _supplierRepository.RemovePhone(phone);
+            }
+
+            await _supplierRepository.Remove(result);
+            await _supplierRepository.SaveChangesAsync();
             await Task.CompletedTask;
         }
 
