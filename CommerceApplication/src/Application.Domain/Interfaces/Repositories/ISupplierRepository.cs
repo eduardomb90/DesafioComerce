@@ -1,5 +1,4 @@
 ﻿using Application.Domain.Entities;
-using Application.Domain.Entities.DTO;
 using Application.Domain.Entities.Pagination;
 using System;
 using System.Collections.Generic;

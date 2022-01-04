@@ -2,22 +2,19 @@
 using Application.Domain.Entities.Pagination;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Domain.Interfaces.Repositories
+namespace Application.Domain.Interfaces.Services
 {
-    public interface IProductRepository : IBaseRepository<Product>
+    public interface IProductService
     {
+        Task AddProduct(Product product);
         Task<Product> GetProductById(Guid Id);
         Task<PaginationViewModel<Product>> Pagination(int PageSize, int PageIndex, string query);
+        Task<Product> FindById(Guid Id);
         Task<IEnumerable<Product>> GetProducts();
-
-        Task AddImage(Image image);
-
-        Task UpdateCategory(Category category);
-        Task UpdateImage(Image image);
-
-        Task RemoveCategory(Category category);
-        Task RemoveImage(Image image);
+        Task Update(Product product);
+        Task Remove(Guid Id);
     }
 }

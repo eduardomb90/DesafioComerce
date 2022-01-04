@@ -9,7 +9,6 @@ namespace Application.Domain.Interfaces.Services
 {
     public interface ISupplierService
     {
-
         Task AddSupplier(SupplierDTO supplier);
         Task<Supplier> GetSupplierById(Guid Id);
         Task<PaginationViewModel<Supplier>> Pagination(int PageSize, int PageIndex, string query);

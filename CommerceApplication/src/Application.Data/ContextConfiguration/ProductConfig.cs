@@ -11,6 +11,8 @@ namespace Application.Data.ContextConfiguration
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Name)
                .IsRequired()
                .HasMaxLength(250)
@@ -34,6 +36,10 @@ namespace Application.Data.ContextConfiguration
                 .HasColumnType("date");
             builder.Property(x => x.UpdateDate)
                 .HasColumnType("date");
+
+            builder.HasOne(x => x.Supplier)
+                .WithMany(x => x.Products)
+                .HasForeignKey(x => x.SupplierId);
         }
     }
 }

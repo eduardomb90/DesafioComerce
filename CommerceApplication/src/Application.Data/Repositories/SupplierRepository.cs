@@ -1,6 +1,5 @@
 ﻿using Application.Data.Context;
 using Application.Domain.Entities;
-using Application.Domain.Entities.DTO;
 using Application.Domain.Entities.Pagination;
 using Application.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +13,8 @@ namespace Application.Data.Repositories
 {
     public class SupplierRepository : BaseRepository<Supplier>, ISupplierRepository, IDisposable
     {
-        public SupplierRepository(CommerceDbContext commerceDbContext) : base(commerceDbContext)
+        public SupplierRepository(CommerceDbContext commerceDbContext) 
+            : base(commerceDbContext)
         {
         }
 
