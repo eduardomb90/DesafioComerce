@@ -13,10 +13,11 @@ namespace Application.Domain.Interfaces.Repositories
         Task<PaginationViewModel<Supplier>> Pagination(int PageSize, int PageIndex, string query);
         Task<IEnumerable<Supplier>> GetSuppliers();
 
+        Task AddPhone(Phone phone);
+
         Task UpdateAddress(Address address);
         Task UpdateEmail(Email email);
         Task UpdatePhone(Phone phone);
-        Task UpdateSupplier(Supplier entity);
 
         Task RemoveAddress(Address address);
         Task RemoveEmail(Email email);

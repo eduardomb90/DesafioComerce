@@ -28,5 +28,23 @@ namespace Application.Domain.Entities
         {
             return Cnpj.IsCnpj();
         }
+
+        public void SetFantasyName(string name)
+        {
+            FantasyName = name;
+        }
+
+        public void SetCompanyName(string companyName)
+        {
+            CompanyName = companyName;
+        }
+        public void SetCnpj(string cnpj)
+        {
+            Cnpj = cnpj;
+        }
+        public void SetOpenDate(DateTime open)
+        {
+            OpenDate = open;
+        }
     }
 }

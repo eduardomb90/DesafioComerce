@@ -1,7 +1,5 @@
 ﻿using Application.Domain.Tools;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Domain.Entities
 {
@@ -39,6 +37,33 @@ namespace Application.Domain.Entities
             return (age >= 18);
         }
 
+        public void SetFantasyName(string name)
+        {
+            FantasyName = name;
+        }
 
+        public void SetFullName(string fullName)
+        {
+            if (FullName != fullName)
+            {
+                FullName = fullName;
+            }
+        }
+
+        public void SetCpf(string cpf)
+        {
+            if (Cpf != cpf && cpf.IsCpf())
+            {
+                Cpf = cpf;
+            }
+        }
+
+        public void SetBirthDate(DateTime birth)
+        {
+            if (BirthDate != birth && OlderThanEighteen())
+            {
+                BirthDate = birth;
+            }
+        }
     }
 }

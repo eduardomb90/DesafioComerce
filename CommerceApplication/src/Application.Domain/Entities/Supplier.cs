@@ -53,5 +53,73 @@ namespace Application.Domain.Entities
                     _phones.Remove(p);
             }
         }
+
+        public void SetAddPhone(Phone phone)
+        {
+            if (Phones.Count >= 3)
+            {
+                throw new Exception("Quantidade limite de numeros telefonicos atingido");
+            }
+
+            _phones.Add(phone);
+        }
+
+        public void SetRemovePhone(Phone phone)
+        {
+            if (PhoneExist(phone.Type))
+            {
+                _phones.Remove(phone);
+            }
+
+            throw new DomainException("Não há telefone para ser removido.");
+        }
+
+        public void SetUpdatePhone(Phone phone)
+        {
+            if (PhoneExist(phone.Type))
+            {
+                var phoneExist = Phones.Where(x => x.Type == phone.Type).FirstOrDefault();
+
+                if (phoneExist.Number != phone.Number)
+                {
+                    phoneExist.SetPhone(phone);
+                }
+            }
+            else
+            {
+                SetAddPhone(new Phone(phone.Ddd, phone.Number, phone.Type, phone.Supplier, phone.SupplierId));
+            }
+        }
+
+        public bool PhoneExist(PhoneType phoneType)
+        {
+            return _phones.Where(x => x.Type == phoneType).FirstOrDefault() != null;
+        }
+
+        public void SetEmail(string email)
+        {
+            if (Email == null)
+            {
+                Email = new Email(email);
+            }
+            else
+            {
+                Email.SetEmail(email);
+            }
+
+        }
+
+        public void SetAddress(Address address)
+        {
+            if (Address == null)
+            {
+                Address = new Address(address.ZipCode, address.Street, address.Number, address.Complement, address.Reference, address.Neighborhood, address.City, address.State);
+
+            }
+            else
+            {
+                Address.SetAddress(address.ZipCode, address.Street, address.Number, address.Complement, address.Reference, address.Neighborhood, address.City, address.State);
+            }
+        }
     }
 }

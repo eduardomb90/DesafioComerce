@@ -66,6 +66,12 @@ namespace Application.Data.Repositories
             };
         }
 
+        public async Task AddPhone(Phone phone)
+        {
+            _commerceDbContext.Phones.Add(phone);
+            await Task.CompletedTask;
+        }
+
         public async Task RemoveAddress(Address address)
         {
             _commerceDbContext.Addresses.Remove(address);
@@ -88,7 +94,6 @@ namespace Application.Data.Repositories
         {
             _commerceDbContext.Entry(address).State = EntityState.Modified;
             _commerceDbContext.Addresses.Update(address);
-            //await _commerceDbContext.SaveChangesAsync();
             await Task.CompletedTask;
         }
 
@@ -96,7 +101,6 @@ namespace Application.Data.Repositories
         {
             _commerceDbContext.Entry(email).State = EntityState.Modified;
             _commerceDbContext.Emails.Update(email);
-            //await _commerceDbContext.SaveChangesAsync();
             await Task.CompletedTask;
         }
 
@@ -104,52 +108,7 @@ namespace Application.Data.Repositories
         {
             _commerceDbContext.Entry(phone).State = EntityState.Modified;
             _commerceDbContext.Phones.Update(phone);
-            //await _commerceDbContext.SaveChangesAsync();
             await Task.CompletedTask;
         }
-
-        public async Task UpdateSupplier(Supplier entity)
-        {
-            var existingSupplier = await GetSupplierById(entity.Id);
-
-            if (existingSupplier != null)
-            {
-                // Update parent
-                _commerceDbContext.Entry(existingSupplier).CurrentValues.SetValues(entity);
-
-                // Delete Phones
-                foreach (var existingPhone in existingSupplier.Phones.ToList())
-                {
-                    if (!entity.Phones.Any(phone => phone.Id == existingPhone.Id))
-                    {
-                        _commerceDbContext.Phones.Remove(existingPhone);
-                        existingSupplier.RemovePhone(existingPhone);
-                    }
-                }
-
-                // Update and Insert children
-                foreach (var phoneModel in entity.Phones)
-                {
-                    var existingPhone = existingSupplier.Phones
-                        .Where(phone => phone.Id == phoneModel.Id && phone.Id != default(Guid))
-                        .SingleOrDefault();
-
-                    if (existingPhone != null)
-                        // Update child
-                        _commerceDbContext.Entry(existingPhone).CurrentValues.SetValues(phoneModel);
-                    else
-                    {
-                        // Insert child                        
-                        existingSupplier.AddPhone(phoneModel.Ddd, phoneModel.Number,
-                                                    phoneModel.Type,
-                                                        phoneModel.SupplierId);
-                    }
-
-                    await _commerceDbContext.SaveChangesAsync();
-                }
-            }
-        }
-
-
     }
 }

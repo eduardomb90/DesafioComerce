@@ -31,5 +31,14 @@ namespace Application.Domain.Entities
             Supplier = supplier;
             SupplierId = supplierId;
         }
+
+        public void SetPhone(Phone phone)
+        {
+            Ddd = phone.Ddd;
+            Number = phone.Number;
+            Type = phone.Type;
+            Supplier = phone.Supplier;
+            SupplierId = phone.SupplierId;
+        }
     }
 }

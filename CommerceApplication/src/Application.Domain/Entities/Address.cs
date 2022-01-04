@@ -23,5 +23,22 @@ namespace Application.Domain.Entities
         protected Address()
         {
         }
+
+        public Address(string zipCode, string street, string number, string complement, string reference, string neighborhood, string city, string state)
+        {
+            SetAddress(zipCode, street, number, complement, reference, neighborhood, city, state);
+        }
+
+        public void SetAddress(string zipCode, string street, string number, string complement, string reference, string neighborhood, string city, string state)
+        {
+            ZipCode = zipCode;
+            Street = street;
+            Number = number;
+            Complement = complement;
+            Reference = reference;
+            Neighborhood = neighborhood;
+            City = city;
+            State = state;
+        }
     }
 }

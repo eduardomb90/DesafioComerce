@@ -16,5 +16,15 @@ namespace Application.Domain.Entities
         protected Email()
         {
         }
+
+        public Email(string email)
+        {
+            EmailAddress = email;
+        }
+
+        public void SetEmail(string email)
+        {
+            EmailAddress = email;
+        }
     }
 }

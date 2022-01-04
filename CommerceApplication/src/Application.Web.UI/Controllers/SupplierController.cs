@@ -45,13 +45,11 @@ namespace Application.Web.UI.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Create()
         {
             return View();
         }
         [HttpPost]
-        [AllowAnonymous]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(SupplierViewModel model)
         {
@@ -79,7 +77,6 @@ namespace Application.Web.UI.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Edit(Guid id)
         {
             var supplier = await _supplierService.GetSupplierById(id);
@@ -103,7 +100,6 @@ namespace Application.Web.UI.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        [AllowAnonymous]
         public async Task<IActionResult> Edit(SupplierViewModel model)
         {
             //if (!ModelState.IsValid) return View(model);
@@ -144,7 +140,6 @@ namespace Application.Web.UI.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Delete(Guid id)
         {
             var supplier = await _supplierService.FindById(id);
@@ -158,7 +153,6 @@ namespace Application.Web.UI.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        [AllowAnonymous]
         public async Task<IActionResult> DeleteConfirmation(Guid id)
         {
             if (id == Guid.Empty) return BadRequest();
