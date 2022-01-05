@@ -18,6 +18,10 @@ namespace Application.Web.UI.IoC
             services.AddScoped<IdentityContextDb>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
             services.AddScoped<ISupplierService, SupplierService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<INotifierService, NotifierService>();
 
             services.AddDbContext<CommerceDbContext>(option => option

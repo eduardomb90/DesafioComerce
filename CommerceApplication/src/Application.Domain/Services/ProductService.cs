@@ -5,6 +5,7 @@ using Application.Domain.Interfaces.Services;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +42,7 @@ namespace Application.Domain.Services
             return await _productRepository.GetProducts();
         }
 
-        public async Task AddSupplier(Product product)
+        public async Task AddProduct(Product product)
         {
             await _productRepository.Insert(product);
             await _productRepository.SaveChangesAsync();
@@ -58,93 +59,41 @@ namespace Application.Domain.Services
                 return;
             }
 
-            result.SetAddress(entity.Physical.Address);
-            result.SetEmail(entity.Physical.Email.EmailAddress);
+            result.SetName(product.Name);
+            result.SetBarCode(product.BarCode);
+            result.SetQuantityStock(product.QuantityStock);
+            result.SetPriceSales(product.PriceSales);
+            result.SetPricePurchase(product.PricePurchase);
+            result.SetActive(product.Active);
+            result.SetSupplierId(product.SupplierId);
+            result.SetCategoryId(product.CategoryId);
 
-            if (entity.Juridical != null)
-            {
-                var resultJuridical = result as SupplierJuridical;
+            await EditImages(result, product);
+            
 
-                resultJuridical.SetFantasyName(entity.Physical.FantasyName);
-
-                resultJuridical.SetOpenDate(entity.Juridical.OpenDate);
-                resultJuridical.SetCnpj(entity.Juridical.Cnpj);
-                resultJuridical.SetCompanyName(entity.Juridical.CompanyName);
-
-                await EditPhones(result, entity.Juridical);
-            }
-            else
-            {
-                var resultPhysical = result as SupplierPhysical;
-
-                resultPhysical.SetFantasyName(entity.Physical.FantasyName);
-
-                resultPhysical.SetBirthDate(entity.Physical.BirthDate);
-                resultPhysical.SetCpf(entity.Physical.Cpf);
-                resultPhysical.SetFullName(entity.Physical.FullName);
-
-                await EditPhones(result, entity.Physical);
-            }
-
-            await _supplierRepository.Update(result);
-            await _supplierRepository.SaveChangesAsync();
+            await _productRepository.Update(result);
+            await _productRepository.SaveChangesAsync();
             await Task.CompletedTask;
         }
 
-        private async Task EditPhones(Supplier result, Supplier supplier)
+        private async Task EditImages(Product result, Product product)
         {
-            if (supplier.Phones.Where(x => x.Type == PhoneType.CellPhone).FirstOrDefault() != null)
+            if(product.Images.Count > 0)
             {
-                result.SetUpdatePhone(supplier.Phones.Where(x => x.Type == PhoneType.CellPhone).FirstOrDefault());
-                await _supplierRepository.UpdatePhone(result.Phones.Where(x => x.Type == PhoneType.CellPhone).FirstOrDefault());
-            }
-
-            if (supplier.Phones.Where(x => x.Type == PhoneType.HomePhone).FirstOrDefault() != null)
-            {
-
-                if (result.PhoneExist(PhoneType.HomePhone))
+                foreach (var image in result.Images.ToList())
                 {
-                    result.SetUpdatePhone(supplier.Phones.Where(x => x.Type == PhoneType.HomePhone).First());
-                    await _supplierRepository.UpdatePhone(result.Phones.Where(x => x.Type == PhoneType.HomePhone).FirstOrDefault());
-                }
-                else
-                {
-                    result.SetUpdatePhone(supplier.Phones.Where(x => x.Type == PhoneType.HomePhone).First());
-                    await _supplierRepository.AddPhone(result.Phones.Where(x => x.Type == PhoneType.HomePhone).First());
-                }
-            }
-            else
-            {
-                var phoneExist = result.Phones.Where(x => x.Type == PhoneType.HomePhone).FirstOrDefault();
-                if (phoneExist != null)
-                {
-                    await _supplierRepository.RemovePhone(phoneExist);
-                    //result.SetRemovePhone(phoneExist);
+                    if (product.Images.Where(x => x.Id == image.Id).FirstOrDefault() != null)
+                        continue;
+                    else
+                        await _productRepository.RemoveImage(image);
                 }
 
-            }
-
-            if (supplier.Phones.Where(x => x.Type == PhoneType.Phone).FirstOrDefault() != null)
-            {
-                if (result.PhoneExist(PhoneType.Phone))
+                foreach (var image in product.Images.ToList())
                 {
-                    result.SetUpdatePhone(supplier.Phones.Where(x => x.Type == PhoneType.Phone).First());
-                    await _supplierRepository.UpdatePhone(result.Phones.Where(x => x.Type == PhoneType.Phone).First());
-
-                }
-                else
-                {
-                    result.SetUpdatePhone(supplier.Phones.Where(x => x.Type == PhoneType.Phone).First());
-                    await _supplierRepository.AddPhone(result.Phones.Where(x => x.Type == PhoneType.Phone).First());
-                }
-            }
-            else
-            {
-                var phoneExist = result.Phones.Where(x => x.Type == PhoneType.Phone).FirstOrDefault();
-                if (phoneExist != null)
-                {
-                    await _supplierRepository.RemovePhone(phoneExist);
-                    //result.SetRemovePhone(phoneExist);
+                    if (result.Images.Where(x => x.Id == image.Id).FirstOrDefault() != null)
+                        continue;
+                    else
+                        result.SetAddImage(image);
                 }
             }
         }
@@ -154,10 +103,6 @@ namespace Application.Domain.Services
             var result = await _productRepository.GetProductById(Id);
 
             if (result == null) return;
-
-            //Primeiro remove todos as entidades que estao relacionadas ao supplier.
-            if (result.Category != null)
-                await _productRepository.RemoveCategory(result.Category);
 
             foreach (var image in result.Images)
             {

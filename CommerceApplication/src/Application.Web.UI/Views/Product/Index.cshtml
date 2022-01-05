@@ -1,0 +1,74 @@
+﻿@model PaginationViewModel<ProductViewModel>
+
+@{ 
+    ViewData["Title"] = "Products";
+}
+
+<h1>Products</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <a asp-action="Create" class="btn btn-primary">New Product</a>
+        </div>
+    </div>
+</div>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Category
+                </th>                
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model.List)
+            {
+                string photoPath = null;
+                if(item.Images.Count > 0)
+                {
+                    photoPath = "~/images/" + item.Images.ElementAt(0).ImagePath ?? "noimage.jpg";
+                }
+
+            <tr>
+
+                <td class="col-md-2 img-fluid">
+                    <img src="@photoPath" alt="Foto do produto" class="card-img" width="100" height="150"
+                         asp-append-version="true" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-controller="Product" asp-route-id="@item.Id"
+                       class="btn btn-warning" title="Edit">
+                        <span class="fas fa-edit">Edit</span>
+                    </a>
+                    <a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id"
+                       class="btn btn-primary" title="Details">
+                        <span class="fas fa-edit">Details</span>
+                    </a>
+                    <a asp-action="Delete" asp-controller="Product" asp-route-id="@item.Id"
+                       class="btn btn-danger" title="Delete">
+                        <span class="fas fa-edit">Delete</span>
+                    </a>
+                </td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+<vc:pagination model-pagination="@Model"></vc:pagination>

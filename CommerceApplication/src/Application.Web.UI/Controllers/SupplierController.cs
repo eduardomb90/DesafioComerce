@@ -10,16 +10,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Application.Web.UI.Controllers
 {
     public class SupplierController : BaseController
     {
+        protected readonly ISupplierService _supplierService;
+
+
         public SupplierController(ISupplierService supplierService, IMapper mapper) 
-        : base(supplierService, mapper)
+        : base(mapper)
         {
+            _supplierService = supplierService;
         }
 
         [AllowAnonymous]

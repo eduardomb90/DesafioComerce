@@ -51,6 +51,7 @@ namespace Application.Data.Repositories
                 list = await _commerceDbContext.Products
                                 .Include(x => x.Supplier)
                                 .Include(x => x.Category)
+                                .Include(x => x.Images)
                                 .AsNoTracking()
                                 .ToPagedListAsync(PageIndex, PageSize);
             }

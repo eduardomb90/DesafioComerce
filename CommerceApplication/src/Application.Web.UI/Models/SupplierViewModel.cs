@@ -7,9 +7,7 @@ namespace Application.Web.UI.Models
 {
     public class SupplierViewModel
     {
-        [ScaffoldColumn(false)]
         public Guid Id { get; set; }
-        [ScaffoldColumn(false)]
         public SupplierType Type { get; set; }
 
         public bool Active { get; set; }

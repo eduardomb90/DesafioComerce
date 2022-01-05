@@ -14,9 +14,12 @@ namespace Application.Web.UI.Mapping
         {
             CreateMap<SupplierViewModel, SupplierPhysical>().ReverseMap();
             CreateMap<SupplierViewModel, SupplierJuridical>().ReverseMap();
+            CreateMap<ProductViewModel, Product>().ReverseMap();
+            CreateMap<CategoryViewModel, Category>().ReverseMap();
             CreateMap<AddressViewModel, Address>().ReverseMap();
             CreateMap<EmailViewModel, Email>().ReverseMap();
             CreateMap<PhoneViewModel, Phone>().ReverseMap();
+            CreateMap<ImageViewModel, Image>().ReverseMap();
         }
     }
 }

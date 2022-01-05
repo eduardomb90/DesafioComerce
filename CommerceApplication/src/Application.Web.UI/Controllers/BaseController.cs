@@ -12,12 +12,10 @@ namespace Application.Web.UI.Controllers
     [Authorize]
     public class BaseController : Controller
     {
-        protected readonly ISupplierService _supplierService;
         protected readonly IMapper _mapper;
 
-        public BaseController(ISupplierService supplierService, IMapper mapper)
+        public BaseController(IMapper mapper)
         {
-            _supplierService = supplierService;
             _mapper = mapper;
         }
     }

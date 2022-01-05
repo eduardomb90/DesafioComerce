@@ -23,7 +23,7 @@ namespace Application.Data.ContextConfiguration
                .HasMaxLength(500)
                .HasColumnType("varchar(500)");
 
-            builder.Property(x => x.QuantityStock)
+            builder.Property(x => x.PricePurchase)
                .IsRequired();
 
             builder.Property(x => x.PricePurchase)

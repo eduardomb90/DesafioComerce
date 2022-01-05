@@ -16,11 +16,10 @@ namespace Application.Web.UI.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(ISupplierService supplierService, 
-                                    IMapper mapper, 
-                                    UserManager<IdentityUser> userManager, 
-                                    SignInManager<IdentityUser> signInManager)
-            : base(supplierService, mapper)
+        public AccountController(IMapper mapper, 
+                                UserManager<IdentityUser> userManager, 
+                                SignInManager<IdentityUser> signInManager)
+            : base(mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;

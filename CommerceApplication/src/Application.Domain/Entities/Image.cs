@@ -17,5 +17,19 @@ namespace Application.Domain.Entities
         protected Image()
         {
         }
+
+        public Image(string imagePath, Product product, Guid productId)
+        {
+            ImagePath = imagePath;
+            Product = product;
+            ProductId = productId;
+        }
+
+        public void SetImage(Image image)
+        {
+            ImagePath = image.ImagePath;
+            Product = image.Product;
+            ProductId = image.ProductId;
+        }
     }
 }
