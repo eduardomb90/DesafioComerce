@@ -24,6 +24,7 @@ namespace Application.Data.Repositories
                 .Include(x => x.Phones)
                 .Include(x => x.Email)
                 .Include(x => x.Address)
+                .Include(x => x.Products)
                 .Where(x => x.Id == Id)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();

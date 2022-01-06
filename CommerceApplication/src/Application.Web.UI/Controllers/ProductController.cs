@@ -23,10 +23,10 @@ namespace Application.Web.UI.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
 
         public ProductController(IProductService productService,
-                                ICategoryService categoryService,
-                                ISupplierService supplierService,
-                                IHostingEnvironment hostingEnvironment,
-                                IMapper mapper)
+                                 ICategoryService categoryService,
+                                 ISupplierService supplierService,
+                                 IHostingEnvironment hostingEnvironment,
+                                 IMapper mapper)
         : base(mapper)
         {
             _productService = productService;
@@ -84,13 +84,6 @@ namespace Application.Web.UI.Controllers
 
             var model = _mapper.Map<ProductViewModel>(product);
 
-            //foreach (var phone in product.Images)
-            //{
-            //    if (phone.Type == PhoneType.CellPhone) model.CellPhone = _mapper.Map<PhoneViewModel>(phone);
-            //    if (phone.Type == PhoneType.HomePhone) model.HomePhone = _mapper.Map<PhoneViewModel>(phone);
-            //    if (phone.Type == PhoneType.Phone) model.Phone = _mapper.Map<PhoneViewModel>(phone);
-            //}
-
             ViewBag.Categories = _mapper.Map<IEnumerable<CategoryViewModel>>(await _categoryService.GetCategories());
             ViewBag.Suppliers = _mapper.Map<IEnumerable<SupplierViewModel>>(await _supplierService.GetSuppliers());
 
@@ -146,6 +139,16 @@ namespace Application.Web.UI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DeleteImage(Guid id)
+        {
+            if (id == Guid.Empty) return BadRequest();
+
+            var idProduto = _productService.RemoveImage(id);
+
+            return RedirectToAction(nameof(Edit), new { id = idProduto });
+        }
+
 
         private async Task AddImage(ProductViewModel model)
         {
@@ -165,20 +168,6 @@ namespace Application.Web.UI.Controllers
 
                     model.Images.Add(new ImageViewModel(uniqueFileName));
                 }
-
-                //foreach (IFormFile image in model.ImagesUpload)
-                //{
-                //    var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-                //    uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                //    var filePath = Path.Combine(uploadFolder, uniqueFileName);
-
-                //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                //    {
-                //        await image.CopyToAsync(fileStream);
-                //    }
-
-                //    model.Images.Add(new ImageViewModel(uniqueFileName));
-                //}
             }
         }
     }

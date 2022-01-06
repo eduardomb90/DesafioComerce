@@ -19,5 +19,6 @@ namespace Application.Domain.Interfaces.Repositories
 
         Task RemoveCategory(Category category);
         Task RemoveImage(Image image);
+        Guid RemoveImageById(Guid id);
     }
 }

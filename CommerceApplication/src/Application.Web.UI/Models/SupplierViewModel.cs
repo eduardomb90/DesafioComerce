@@ -19,7 +19,8 @@ namespace Application.Web.UI.Models
         public PhoneViewModel HomePhone { get; set; }
         public PhoneViewModel Phone { get; set; }
         
-        
+        public virtual ICollection<ProductViewModel> Products { get; set; } = new List<ProductViewModel>();
+
         public string FantasyName { get; set; }
 
 

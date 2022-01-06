@@ -5,11 +5,14 @@ using Application.Domain.Entities.Pagination;
 using Application.Domain.Interfaces.Services;
 using Application.Web.UI.Models;
 using Application.Web.UI.Models.Enums;
+using Application.Web.UI.Tools;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Application.Web.UI.Controllers
@@ -17,12 +20,18 @@ namespace Application.Web.UI.Controllers
     public class SupplierController : BaseController
     {
         protected readonly ISupplierService _supplierService;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IProductService _productService;
 
-
-        public SupplierController(ISupplierService supplierService, IMapper mapper) 
+        public SupplierController(ISupplierService supplierService,
+                                  IHostingEnvironment hostingEnvironment,
+                                  IProductService productService,
+                                  IMapper mapper) 
         : base(mapper)
         {
             _supplierService = supplierService;
+            _hostingEnvironment = hostingEnvironment;
+            _productService = productService;
         }
 
         [AllowAnonymous]
@@ -164,6 +173,31 @@ namespace Application.Web.UI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ExportSupplierXlsx()
+        {
+            var suppliersList = await _supplierService.GetSuppliers();
+            var productsList = await _productService.GetProducts();
+
+            foreach (var supplier in suppliersList)
+            {
+                foreach (var product in productsList)
+                {
+                    if (supplier.Id == product.SupplierId)
+                        supplier.Products.Add(product);
+                }
+            }
+
+            var listModel = _mapper.Map<IEnumerable<SupplierViewModel>>(suppliersList);
+
+            var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "reports");
+            var uniqueFileName = Guid.NewGuid().ToString() + "_Relatorio.xlsx";
+            var filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+            GenerateExcel.Create(filePath, listModel);
+
+            return RedirectToAction(nameof(Index));
+        }
 
         private static void AddPhones(SupplierViewModel model, Supplier supplier)
         {

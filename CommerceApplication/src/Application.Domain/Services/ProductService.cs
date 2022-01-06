@@ -15,11 +15,14 @@ namespace Application.Domain.Services
     {
         private readonly INotifierService _notifierService;
         private readonly IProductRepository _productRepository;
+        //private readonly IImageService _imageService;
+        
 
-        public ProductService(INotifierService notifierService, IProductRepository productRepository)
+        public ProductService(INotifierService notifierService, IProductRepository productRepository/*, IImageService imageService*/)
         {
             _notifierService = notifierService;
             _productRepository = productRepository;
+            //_imageService = imageService;
         }
 
         public async Task<Product> GetProductById(Guid Id)
@@ -112,6 +115,13 @@ namespace Application.Domain.Services
             await _productRepository.Remove(result);
             await _productRepository.SaveChangesAsync();
             await Task.CompletedTask;
+        }
+
+        public Guid RemoveImage(Guid id)
+        {
+            var productId = _productRepository.RemoveImageById(id);
+            _productRepository.SaveChangesAsync();
+            return productId;
         }
 
         private bool RunValidation<Tv, Te>(Tv validacao, Te entidade) where Tv : AbstractValidator<Te> where Te : BaseEntity

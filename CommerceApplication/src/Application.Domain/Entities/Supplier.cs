@@ -14,7 +14,7 @@ namespace Application.Domain.Entities
 
         private List<Phone> _phones = new List<Phone>();
         public IReadOnlyCollection<Phone> Phones => _phones;
-        public ICollection<Product> Products { get; private set; }
+        public ICollection<Product> Products { get; private set; } = new List<Product>();
 
 
         //ForeignKeys na classe menor

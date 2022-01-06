@@ -84,6 +84,14 @@ namespace Application.Data.Repositories
             await Task.CompletedTask;
         }
 
+        public Guid RemoveImageById(Guid id)
+        {
+            var image = _commerceDbContext.Images.Where(x => x.Id == id).FirstOrDefault();
+            var productId = image.ProductId;
+            _commerceDbContext.Images.Remove(image);
+            return productId;
+        }
+
         public async Task UpdateCategory(Category category)
         {
             _commerceDbContext.Entry(category).State = EntityState.Modified;
