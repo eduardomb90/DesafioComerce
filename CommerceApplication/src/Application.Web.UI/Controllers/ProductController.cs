@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace Application.Web.UI.Controllers
 {
+    [Authorize(Roles ="Admin, User")]
     public class ProductController : BaseController
     {
         private readonly IProductService _productService;
@@ -36,7 +37,7 @@ namespace Application.Web.UI.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int PageSize = 1, int PageIndex = 1, string query = null)
+        public async Task<IActionResult> Index(int PageSize = 5, int PageIndex = 1, string query = null)
         {
             var result = await _productService.Pagination(PageSize, PageIndex, query);
 
@@ -140,14 +141,17 @@ namespace Application.Web.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> DeleteImage(Guid id)
+        public async Task<IActionResult> DeleteImage(Guid id, string path)
         {
             if (id == Guid.Empty) return BadRequest();
 
             var idProduto = await _productService.RemoveImage(id);
+            await DeleteImage(path);
 
             return RedirectToAction(nameof(Edit), new { id = idProduto });
         }
+
+
 
 
         private async Task AddImage(ProductViewModel model)
@@ -168,6 +172,20 @@ namespace Application.Web.UI.Controllers
 
                     model.Images.Add(new ImageViewModel(uniqueFileName));
                 }
+            }
+        }
+
+        private async Task DeleteImage(string imagePath)
+        {
+            var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+            var filePath = Path.Combine(uploadFolder, imagePath);
+            
+            FileInfo file = new FileInfo(filePath);
+            
+            if (file.Exists)
+            {
+                file.Delete();
+                await Task.CompletedTask;
             }
         }
     }

@@ -87,8 +87,8 @@ namespace Application.Domain.Services
                 {
                     if (product.Images.Where(x => x.Id == image.Id).FirstOrDefault() != null)
                         continue;
-                    else
-                        await _productRepository.RemoveImage(image);
+                    //else
+                    //    await _productRepository.RemoveImage(image);
                 }
 
                 foreach (var image in product.Images.ToList())

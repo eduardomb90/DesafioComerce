@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace Application.Web.UI.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class SupplierController : BaseController
     {
         protected readonly ISupplierService _supplierService;
@@ -35,7 +36,7 @@ namespace Application.Web.UI.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int PageSize = 1, int PageIndex = 1, string query = null)
+        public async Task<IActionResult> Index(int PageSize = 5, int PageIndex = 1, string query = null)
         {
             var result = await _supplierService.Pagination(PageSize, PageIndex, query);
 
@@ -162,7 +163,6 @@ namespace Application.Web.UI.Controllers
 
             return View(model);
         }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> DeleteConfirmation(Guid id)

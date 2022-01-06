@@ -81,7 +81,9 @@
 
                     <img src="@photoPath" alt="" class="card-img" width="100" height="150"
                          asp-append-version="true" />
-                    <a asp-action="DeleteImage" asp-controller="Product" asp-route-id="@image.Id" title="Delete">
+                    <a asp-action="DeleteImage" asp-controller="Product" 
+                       asp-route-id="@image.Id" asp-route-path="@image.ImagePath" 
+                       title="Delete">
                         <span class="fas fa-edit">Delete</span>
                     </a>
                 }
