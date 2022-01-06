@@ -107,10 +107,10 @@ namespace Application.Web.UI.Controllers
             //    return View(model);
             //}
 
+            await AddImage(model);
+
             var product = _mapper.Map<Product>(model);
 
-            //AddImages(model, supplier.Juridical);
-            
             await _productService.Update(product);
 
             //if (!ValidOperation()) return View(model);
@@ -144,7 +144,7 @@ namespace Application.Web.UI.Controllers
         {
             if (id == Guid.Empty) return BadRequest();
 
-            var idProduto = _productService.RemoveImage(id);
+            var idProduto = await _productService.RemoveImage(id);
 
             return RedirectToAction(nameof(Edit), new { id = idProduto });
         }
@@ -153,17 +153,17 @@ namespace Application.Web.UI.Controllers
         private async Task AddImage(ProductViewModel model)
         {
             string uniqueFileName = null;
-            if (model.ImagesUpload != null && model.ImagesUpload.Count > 0)
-            {
-                for (int i = 1; i < 5; i++)
+            if (model.ImagesUpload != null && model.ImagesUpload.Count > 0 && model.ImagesUpload.Count <= 5)
+            {                
+                foreach (var image in model.ImagesUpload.ToList())
                 {
                     var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImagesUpload[i].FileName;
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
                     var filePath = Path.Combine(uploadFolder, uniqueFileName);
 
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
-                        await model.ImagesUpload[i].CopyToAsync(fileStream);
+                        await image.CopyToAsync(fileStream);
                     }
 
                     model.Images.Add(new ImageViewModel(uniqueFileName));

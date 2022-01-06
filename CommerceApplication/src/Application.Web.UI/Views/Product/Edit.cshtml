@@ -73,14 +73,14 @@
                 </div>
             </div>
 
-            @if(Model.Images.Count > 0)
+            @if (Model.Images.Count > 0)
             {
                 @foreach (var image in Model.Images)
                 {
                     var photoPath = "~/images/" + image.ImagePath;
 
                     <img src="@photoPath" alt="" class="card-img" width="100" height="150"
-                        asp-append-version="true" />
+                         asp-append-version="true" />
                     <a asp-action="DeleteImage" asp-controller="Product" asp-route-id="@image.Id" title="Delete">
                         <span class="fas fa-edit">Delete</span>
                     </a>
@@ -102,17 +102,36 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@*This script is required to display the selected file in the file upload element
+    If a sinle file is selected, the name of the file is displayed. If multiple
+    files are selected, then the count of files is displayed.*@
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
-    @*@{ 
-        <script>
-            $(document).ready(function () {
-                $('.custom-file-input').on("change", function () {
-                    var fileName = $(this).val().split("\\").pop();
-                    $(this).next('.custom-file-label').html(fileName);
-                });
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+                if (files.length > 1) {
+                    fileLabel.html(files.length + ' files selected');
+                }
+                else if (files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+
+                if (files.length > 5) {
+                    alert("You can only upload a maximum of 5 images");
+                }
             });
-        </script>
-    }*@
+        });
+
+        $(function () {
+            $("button[type='submit']").click(function () {
+                var $fileUpload = $("input[type='file']");
+                if (parseInt($fileUpload.get(0).files.length) > 5) {
+                    alert("You can only upload a maximum of 5 images");
+                }
+            });
+        });
+    </script>
 }

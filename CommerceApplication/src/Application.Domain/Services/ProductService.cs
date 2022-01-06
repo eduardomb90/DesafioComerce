@@ -97,6 +97,7 @@ namespace Application.Domain.Services
                         continue;
                     else
                         result.SetAddImage(image);
+                        await _productRepository.AddImage(image);
                 }
             }
         }
@@ -117,10 +118,10 @@ namespace Application.Domain.Services
             await Task.CompletedTask;
         }
 
-        public Guid RemoveImage(Guid id)
+        public async Task<Guid> RemoveImage(Guid id)
         {
             var productId = _productRepository.RemoveImageById(id);
-            _productRepository.SaveChangesAsync();
+            await _productRepository.SaveChangesAsync();
             return productId;
         }
 

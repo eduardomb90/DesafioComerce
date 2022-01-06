@@ -16,6 +16,6 @@ namespace Application.Domain.Interfaces.Services
         Task<IEnumerable<Product>> GetProducts();
         Task Update(Product product);
         Task Remove(Guid Id);
-        Guid RemoveImage(Guid Id);
+        Task <Guid> RemoveImage(Guid Id);
     }
 }
