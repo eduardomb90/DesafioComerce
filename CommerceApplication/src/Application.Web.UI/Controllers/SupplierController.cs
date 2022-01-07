@@ -70,7 +70,7 @@ namespace Application.Web.UI.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(SupplierViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            //if (!ModelState.IsValid) return View(model);
 
             var result = await _supplierValidation.ValidateAsync(model);
 
