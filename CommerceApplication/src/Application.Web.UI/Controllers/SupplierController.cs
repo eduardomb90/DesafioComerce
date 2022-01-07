@@ -6,6 +6,7 @@ using Application.Domain.Interfaces.Services;
 using Application.Web.UI.Models;
 using Application.Web.UI.Models.Enums;
 using Application.Web.UI.Tools;
+using Application.Web.UI.Validations;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -23,16 +24,19 @@ namespace Application.Web.UI.Controllers
         protected readonly ISupplierService _supplierService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IProductService _productService;
+        private readonly INotifierService _notifierService;
+        private readonly SupplierViewModelValidation _supplierValidation;
 
-        public SupplierController(ISupplierService supplierService,
-                                  IHostingEnvironment hostingEnvironment,
-                                  IProductService productService,
-                                  IMapper mapper) 
-        : base(mapper)
+        public SupplierController(ISupplierService supplierService, IHostingEnvironment hostingEnvironment,
+                                  IProductService productService, IMapper mapper, INotifierService notifierService,
+                                  SupplierViewModelValidation supplierValidation) 
+        : base(mapper, notifierService)
         {
             _supplierService = supplierService;
             _hostingEnvironment = hostingEnvironment;
             _productService = productService;
+            _notifierService = notifierService;
+            _supplierValidation = supplierValidation;
         }
 
         [AllowAnonymous]
@@ -67,6 +71,18 @@ namespace Application.Web.UI.Controllers
         public async Task<IActionResult> Create(SupplierViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
+
+            var result = await _supplierValidation.ValidateAsync(model);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
+                }
+
+                return View(model);
+            }
 
             SupplierDTO supplier = new SupplierDTO();
 
@@ -110,24 +126,23 @@ namespace Application.Web.UI.Controllers
 
             return View(model);
         }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Edit(SupplierViewModel model)
         {
-            //if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return View(model);
 
-            //var result = await _supplierValidation.ValidateAsync(model);
+            var result = await _supplierValidation.ValidateAsync(model);
 
-            //if (!result.IsValid)
-            //{
-            //    foreach (var failure in result.Errors)
-            //    {
-            //        Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
-            //    }
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
+                }
 
-            //    return View(model);
-            //}
+                return View(model);
+            }
 
             SupplierDTO supplier = new SupplierDTO();
 

@@ -2,6 +2,7 @@
 using Application.Domain.Entities.Pagination;
 using Application.Domain.Interfaces.Services;
 using Application.Web.UI.Models;
+using Application.Web.UI.Validations;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -22,18 +23,21 @@ namespace Application.Web.UI.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ISupplierService _supplierService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly INotifierService _notifierService;
+        private readonly ProductViewModelValidation _productValidation;
 
-        public ProductController(IProductService productService,
-                                 ICategoryService categoryService,
-                                 ISupplierService supplierService,
-                                 IHostingEnvironment hostingEnvironment,
-                                 IMapper mapper)
-        : base(mapper)
+        public ProductController(IProductService productService, ICategoryService categoryService,
+                                 ISupplierService supplierService, IHostingEnvironment hostingEnvironment,
+                                 IMapper mapper, INotifierService notifierService,
+                                 ProductViewModelValidation productValidation)
+        : base(mapper, notifierService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _supplierService = supplierService;
             _hostingEnvironment = hostingEnvironment;
+            _notifierService = notifierService;
+            _productValidation = productValidation;
         }
 
         [AllowAnonymous]
@@ -66,7 +70,19 @@ namespace Application.Web.UI.Controllers
         public async Task<IActionResult> Create(ProductViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
-            
+
+            var result = await _productValidation.ValidateAsync(model);
+
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
+                }
+
+                return View(model);
+            }
+
             await AddImage(model);
 
             var product = _mapper.Map<Product>(model);
@@ -80,10 +96,11 @@ namespace Application.Web.UI.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var product = await _productService.GetProductById(id);
-
             if (product == null) return BadRequest();
 
             var model = _mapper.Map<ProductViewModel>(product);
+            
+            if (!ModelState.IsValid) return View(model);
 
             ViewBag.Categories = _mapper.Map<IEnumerable<CategoryViewModel>>(await _categoryService.GetCategories());
             ViewBag.Suppliers = _mapper.Map<IEnumerable<SupplierViewModel>>(await _supplierService.GetSuppliers());
@@ -96,17 +113,17 @@ namespace Application.Web.UI.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            //var result = await _supplierValidation.ValidateAsync(model);
+            var result = await _productValidation.ValidateAsync(model);
 
-            //if (!result.IsValid)
-            //{
-            //    foreach (var failure in result.Errors)
-            //    {
-            //        Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
-            //    }
+            if (!result.IsValid)
+            {
+                foreach (var failure in result.Errors)
+                {
+                    Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
+                }
 
-            //    return View(model);
-            //}
+                return View(model);
+            }
 
             await AddImage(model);
 

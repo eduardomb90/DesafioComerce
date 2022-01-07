@@ -1,6 +1,10 @@
 using Application.Data.Context;
 using Application.Web.UI.AppDbContext;
 using Application.Web.UI.IoC;
+using Application.Web.UI.Models;
+using Application.Web.UI.Validations;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -30,7 +34,11 @@ namespace Application.Web.UI
                 options.Password.RequireNonAlphanumeric = false;
             })
                 .AddEntityFrameworkStores<IdentityContextDb>();
-            
+
+            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+            services.AddScoped<IValidator<SupplierViewModel>, SupplierViewModelValidation>();
+
+
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             

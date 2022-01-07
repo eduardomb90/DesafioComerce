@@ -13,10 +13,18 @@ namespace Application.Web.UI.Controllers
     public class BaseController : Controller
     {
         protected readonly IMapper _mapper;
+        private readonly INotifierService _notifierService;
 
-        public BaseController(IMapper mapper)
+        public BaseController(IMapper mapper,
+                              INotifierService notifierService)
         {
             _mapper = mapper;
+            _notifierService = notifierService;
+        }
+
+        protected bool OperationValid()
+        {
+            return _notifierService.HasError();
         }
     }
 }

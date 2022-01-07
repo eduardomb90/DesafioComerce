@@ -11,15 +11,13 @@ using System.Threading.Tasks;
 
 namespace Application.Web.UI.Controllers
 {
-    public class AccountController : BaseController
+    [Authorize]
+    public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(IMapper mapper, 
-                                UserManager<IdentityUser> userManager, 
-                                SignInManager<IdentityUser> signInManager)
-            : base(mapper)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -81,7 +79,6 @@ namespace Application.Web.UI.Controllers
         {
             return View();
         }
-
         [AllowAnonymous]
         [AutoValidateAntiforgeryToken]
         [HttpPost]
@@ -109,6 +106,13 @@ namespace Application.Web.UI.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

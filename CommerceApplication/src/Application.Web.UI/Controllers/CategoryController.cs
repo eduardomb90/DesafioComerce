@@ -15,11 +15,13 @@ namespace Application.Web.UI.Controllers
     public class CategoryController : BaseController
     {
         private readonly ICategoryService _categoryService;
+        private readonly INotifierService _notifierService;
 
-        public CategoryController(ICategoryService categoryService, IMapper mapper)
-        : base(mapper)
+        public CategoryController(ICategoryService categoryService, IMapper mapper, INotifierService notifierService)
+        : base(mapper, notifierService)
         {
             _categoryService = categoryService;
+            _notifierService = notifierService;
         }
 
         [AllowAnonymous]
@@ -36,12 +38,6 @@ namespace Application.Web.UI.Controllers
                 TotalResult = result.TotalResult,
                 ReferenceAction = "Index"
             });
-
-            //var suppliers = await _supplierService.GetSuppliers();
-
-            //var model = _mapper.Map<IEnumerable<SupplierViewModel>>(suppliers);
-
-            //return View(model);
         }
 
         [HttpGet]
@@ -56,7 +52,6 @@ namespace Application.Web.UI.Controllers
             if (!ModelState.IsValid) return View(model);
 
             var category = _mapper.Map<Category>(model);
-            //AddImages(model, supplier.Physical);
 
             await _categoryService.AddCategory(category);
 
@@ -74,30 +69,15 @@ namespace Application.Web.UI.Controllers
 
             return View(model);
         }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Edit(CategoryViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            //var result = await _supplierValidation.ValidateAsync(model);
-
-            //if (!result.IsValid)
-            //{
-            //    foreach (var failure in result.Errors)
-            //    {
-            //        Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
-            //    }
-
-            //    return View(model);
-            //}
-
             var category = _mapper.Map<Category>(model);
 
             await _categoryService.Update(category);
-
-            //if (!ValidOperation()) return View(model);
 
             return RedirectToAction(nameof(Index));
         }

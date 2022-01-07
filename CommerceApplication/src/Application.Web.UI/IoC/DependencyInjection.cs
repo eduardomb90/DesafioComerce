@@ -23,6 +23,7 @@ namespace Application.Web.UI.IoC
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<INotifierService, NotifierService>();
+            
 
             services.AddDbContext<CommerceDbContext>(option => option
                                     .UseSqlServer(configuration.GetConnectionString("CommerceDbContext")));
