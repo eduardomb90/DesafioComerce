@@ -1,0 +1,10 @@
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\bin\Debug\netcoreapp3.1\Application.Domain.deps.json
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\bin\Debug\netcoreapp3.1\Application.Domain.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\bin\Debug\netcoreapp3.1\Application.Domain.pdb
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\obj\Debug\netcoreapp3.1\Application.Domain.csproj.AssemblyReference.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\obj\Debug\netcoreapp3.1\Application.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\obj\Debug\netcoreapp3.1\Application.Domain.AssemblyInfoInputs.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\obj\Debug\netcoreapp3.1\Application.Domain.AssemblyInfo.cs
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\obj\Debug\netcoreapp3.1\Application.Domain.csproj.CoreCompileInputs.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\obj\Debug\netcoreapp3.1\Application.Domain.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\obj\Debug\netcoreapp3.1\Application.Domain.pdb

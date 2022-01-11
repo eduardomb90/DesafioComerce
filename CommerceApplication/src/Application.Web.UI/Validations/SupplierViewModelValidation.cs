@@ -11,8 +11,8 @@ namespace Application.Web.UI.Validations
     {
         public SupplierViewModelValidation()
         {
-            RuleFor(x => x.Type)
-                .NotEmpty();
+            // RuleFor(x => x.Type)
+            //     .NotEmpty();
             
             //RuleFor(x => x.Email.EmailAddress)
             //    .NotEmpty()
@@ -82,9 +82,9 @@ namespace Application.Web.UI.Validations
             //    .Matches(@"^(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}$")
             //    .WithMessage("Please type a valid phone number.");
 
-            RuleFor(x => x.FantasyName)
-                .NotEmpty()
-                .WithMessage("This field is required.");
+            // RuleFor(x => x.FantasyName)
+            //     .NotEmpty()
+            //     .WithMessage("This field is required.");
 
             //RuleFor(x => x.FullName)
             //    .

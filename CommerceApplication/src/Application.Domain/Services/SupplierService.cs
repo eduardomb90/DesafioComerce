@@ -49,12 +49,39 @@ namespace Application.Domain.Services
         {
             if (entity.Juridical != null)
             {
+                if(await _supplierRepository.FindJuridical(x => x.Cnpj == entity.Juridical.Cnpj || x.FantasyName == entity.Juridical.FantasyName) != null)
+                {
+                    _notifierService.AddError("CNPJ já existe ou nome fantasia já existe.");
+                    return;
+                }
+
+                if(!entity.Juridical.IsValid())
+                {
+                    _notifierService.AddError("Deve fornecer um CNPJ válido.");
+                    return;
+                }
+                
                 await _supplierRepository.Insert(entity.Juridical);
             }
             else
             {
+                if(await _supplierRepository.FindPhysical(x => x.Cpf == entity.Physical.Cpf || x.FantasyName == entity.Physical.FantasyName) != null)
+                {
+                    _notifierService.AddError("CPF já existe ou nome fantasia já existe.");
+                    return;
+                }
+
+                if(!entity.Physical.IsValid())
+                {
+                    _notifierService.AddError("Idade deve ser maior ou igual a 18, e o CPF deve ser válido.");
+                    return;
+                }
+
                 await _supplierRepository.Insert(entity.Physical);
             }
+
+            if(_notifierService.HasError()) return;
+
             await _supplierRepository.SaveChangesAsync();
             await Task.CompletedTask;
         }

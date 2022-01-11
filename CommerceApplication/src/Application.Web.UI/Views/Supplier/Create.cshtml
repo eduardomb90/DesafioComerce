@@ -4,6 +4,9 @@
     ViewData["Title"] = "Create New Supplier";
 }
 
+<vc:summary></vc:summary>
+@* <div asp-validation-summary="All" class="text-danger"></div> *@
+
 <div class="tab">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item active" role="presentation">
@@ -95,7 +98,6 @@
 
             <div>
                 <h3>Phones</h3>
-                <input asp-for="CellPhone.Id" hidden>
                 <div class="mb-3">
                     <label asp-for="CellPhone.Ddd" class="form-label"></label>
                     <input asp-for="CellPhone.Ddd" class="form-control">
@@ -106,7 +108,6 @@
                     <input asp-for="CellPhone.Number" class="form-control">
                     <span asp-validation-for="CellPhone.Number" class="text-danger"></span>
                 </div>
-                <input asp-for="HomePhone.Id" hidden>
                 <div class="mb-3">
                     <label asp-for="HomePhone.Ddd" class="form-label"></label>
                     <input asp-for="HomePhone.Ddd" class="form-control">
@@ -117,7 +118,6 @@
                     <input asp-for="HomePhone.Number" class="form-control">
                     <span asp-validation-for="HomePhone.Number" class="text-danger"></span>
                 </div>
-                <input asp-for="Phone.Id" hidden>
                 <div class="mb-3">
                     <label asp-for="Phone.Ddd" class="form-label"></label>
                     <input asp-for="Phone.Ddd" class="form-control">
@@ -215,7 +215,6 @@
 
             <div>
                 <h3>Phones</h3>
-                <input asp-for="CellPhone.Id" hidden>
                 <div class="mb-3">
                     <label asp-for="CellPhone.Ddd" class="form-label"></label>
                     <input asp-for="CellPhone.Ddd" class="form-control">
@@ -226,7 +225,6 @@
                     <input asp-for="CellPhone.Number" class="form-control">
                     <span asp-validation-for="CellPhone.Number" class="text-danger"></span>
                 </div>
-                <input asp-for="HomePhone.Id" hidden>
                 <div class="mb-3">
                     <label asp-for="HomePhone.Ddd" class="form-label"></label>
                     <input asp-for="HomePhone.Ddd" class="form-control">
@@ -237,7 +235,6 @@
                     <input asp-for="HomePhone.Number" class="form-control">
                     <span asp-validation-for="HomePhone.Number" class="text-danger"></span>
                 </div>
-                <input asp-for="Phone.Id" hidden>
                 <div class="mb-3">
                     <label asp-for="Phone.Ddd" class="form-label"></label>
                     <input asp-for="Phone.Ddd" class="form-control">

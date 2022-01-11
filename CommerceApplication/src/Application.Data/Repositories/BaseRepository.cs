@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using X.PagedList;
 
@@ -29,6 +30,11 @@ namespace Application.Data.Repositories
         {
             return await _commerceDbContext.Set<TEntity>().Where(x => x.Id == Id).AsNoTracking().FirstOrDefaultAsync();
         }
+
+        public async Task<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _commerceDbContext.Set<TEntity>().Where(predicate).FirstOrDefaultAsync();
+        } 
 
         public async Task Insert(TEntity entity)
         {

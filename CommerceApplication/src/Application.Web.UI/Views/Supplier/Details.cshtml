@@ -1,0 +1,71 @@
+@model SupplierViewModel
+
+@{ 
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Identificação
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (Model.Cpf != null)
+                {
+                    @Html.Raw("<td>")
+                    @Html.DisplayFor(modelItem => Model.FullName)
+                    @Html.Raw("</td>")
+                    @Html.Raw("<td>")
+                    @Html.DisplayFor(modelItem => Model.Cpf)
+                    @Html.Raw("</td>")
+                }
+                else
+                {
+                    @Html.Raw("<td>")
+                    @Html.DisplayFor(modelItem => Model.CompanyName)
+                    @Html.Raw("</td>")
+                    @Html.Raw("<td>")
+                    @Html.DisplayFor(modelItem => Model.Cnpj)
+                    @Html.Raw("</td>")
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Email.EmailAddress)
+                </td>
+
+                <td>
+                    <a asp-action="Index" asp-controller="Supplier" class="btn btn-primary">
+                        <span class="fas fa-edit">Back</span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    @foreach (var product in Model.Products)
+    {
+        <ul class="list-group">
+            <ul>
+                <li class="list-group-item">
+                    @product.Name
+                </li>
+                <li class="list-group-item">
+                    @product.PriceSales
+                </li>
+            </ul>
+        </ul> 
+    }
+</div>

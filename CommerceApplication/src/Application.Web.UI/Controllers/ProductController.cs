@@ -168,7 +168,14 @@ namespace Application.Web.UI.Controllers
             return RedirectToAction(nameof(Edit), new { id = idProduto });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id){
+            var result = await _productService.GetProductById(id);
 
+            var model = _mapper.Map<ProductViewModel>(result);
+            
+            return View(model);
+        }
 
 
         private async Task AddImage(ProductViewModel model)

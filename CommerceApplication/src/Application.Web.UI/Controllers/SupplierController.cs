@@ -53,12 +53,6 @@ namespace Application.Web.UI.Controllers
                 TotalResult = result.TotalResult,
                 ReferenceAction = "Index"
             });
-
-            //var suppliers = await _supplierService.GetSuppliers();
-
-            //var model = _mapper.Map<IEnumerable<SupplierViewModel>>(suppliers);
-
-            //return View(model);
         }
 
         [HttpGet]
@@ -70,19 +64,19 @@ namespace Application.Web.UI.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(SupplierViewModel model)
         {
-            //if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return View(model);
 
-            var result = await _supplierValidation.ValidateAsync(model);
+            // var result = await _supplierValidation.ValidateAsync(model);
 
-            if (!result.IsValid)
-            {
-                foreach (var failure in result.Errors)
-                {
-                    Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
-                }
+            // if (!result.IsValid)
+            // {
+            //     foreach (var failure in result.Errors)
+            //     {
+            //         Console.WriteLine("Property " + failure.PropertyName + " failed validation. Error was: " + failure.ErrorMessage);
+            //     }
 
-                return View(model);
-            }
+            //     return View(model);
+            // }
 
             SupplierDTO supplier = new SupplierDTO();
 
@@ -101,6 +95,8 @@ namespace Application.Web.UI.Controllers
             }
 
             await _supplierService.AddSupplier(supplier);
+
+            if(_notifierService.HasError()) return View(model);
 
             return RedirectToAction(nameof(Index));
         }
@@ -162,7 +158,7 @@ namespace Application.Web.UI.Controllers
 
             await _supplierService.Update(supplier);
 
-            //if (!ValidOperation()) return View(model);
+            if (_notifierService.HasError()) return View(model);
 
             return RedirectToAction(nameof(Index));
         }
@@ -212,6 +208,15 @@ namespace Application.Web.UI.Controllers
             GenerateExcel.Create(filePath, listModel);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id){
+            var result = await _supplierService.GetSupplierById(id);
+
+            var model = _mapper.Map<SupplierViewModel>(result);
+            
+            return View(model);
         }
 
         private static void AddPhones(SupplierViewModel model, Supplier supplier)

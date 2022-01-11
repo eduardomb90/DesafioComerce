@@ -1,0 +1,252 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Web.UI\\Application.Web.UI.csproj": {}
+  },
+  "projects": {
+    "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Data\\Application.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Data\\Application.Data.csproj",
+        "projectName": "Application.Data",
+        "projectPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Data\\Application.Data.csproj",
+        "packagesPath": "C:\\Users\\emarquba\\.nuget\\packages\\",
+        "outputPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\emarquba\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\Application.Domain.csproj": {
+                "projectPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\Application.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.22, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.22, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.22, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.22, )"
+            },
+            "X.PagedList": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\Application.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\Application.Domain.csproj",
+        "projectName": "Application.Domain",
+        "projectPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\Application.Domain.csproj",
+        "packagesPath": "C:\\Users\\emarquba\\.nuget\\packages\\",
+        "outputPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\emarquba\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[10.3.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Web.UI\\Application.Web.UI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Web.UI\\Application.Web.UI.csproj",
+        "projectName": "Application.Web.UI",
+        "projectPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Web.UI\\Application.Web.UI.csproj",
+        "packagesPath": "C:\\Users\\emarquba\\.nuget\\packages\\",
+        "outputPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Web.UI\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\emarquba\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Data\\Application.Data.csproj": {
+                "projectPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Data\\Application.Data.csproj"
+              },
+              "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\Application.Domain.csproj": {
+                "projectPath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\Application.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.95.4, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[10.3.6, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[10.3.6, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.22, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.22, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.20, 3.1.20]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

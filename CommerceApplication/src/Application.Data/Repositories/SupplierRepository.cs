@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using X.PagedList;
 
@@ -38,6 +39,16 @@ namespace Application.Data.Repositories
                 .Include(x => x.Address)
                 .AsNoTracking()
                 .ToListAsync();
+        }
+
+        public async Task<SupplierPhysical> FindPhysical(Expression<Func<SupplierPhysical, bool>> predicate)
+        {
+            return await _commerceDbContext.SupplierPhysicals.Where(predicate).FirstOrDefaultAsync();
+        } 
+
+        public async Task<SupplierJuridical> FindJuridical(Expression<Func<SupplierJuridical, bool>> predicate)
+        {
+            return await _commerceDbContext.SupplierJuridicals.Where(predicate).FirstOrDefaultAsync();
         }
 
         public async Task<PaginationViewModel<Supplier>> Pagination(int PageSize, int PageIndex, string query)

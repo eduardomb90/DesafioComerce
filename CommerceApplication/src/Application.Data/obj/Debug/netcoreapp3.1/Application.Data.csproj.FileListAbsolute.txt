@@ -1,0 +1,15 @@
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\netcoreapp3.1\Application.Data.deps.json
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\netcoreapp3.1\Application.Data.runtimeconfig.json
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\netcoreapp3.1\Application.Data.runtimeconfig.dev.json
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\netcoreapp3.1\Application.Data.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\netcoreapp3.1\Application.Data.pdb
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\netcoreapp3.1\Application.Domain.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\netcoreapp3.1\Application.Domain.pdb
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\netcoreapp3.1\Application.Data.csproj.AssemblyReference.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\netcoreapp3.1\Application.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\netcoreapp3.1\Application.Data.AssemblyInfoInputs.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\netcoreapp3.1\Application.Data.AssemblyInfo.cs
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\netcoreapp3.1\Application.Data.csproj.CoreCompileInputs.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\netcoreapp3.1\Application.Data.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\netcoreapp3.1\Application.Data.pdb
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\netcoreapp3.1\Application.Data.genruntimeconfig.cache

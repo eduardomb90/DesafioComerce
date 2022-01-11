@@ -1,0 +1,43 @@
+@model ProductViewModel
+
+@{ 
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Supplier
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <td>
+                @Html.DisplayFor(modelItem => Model.Name)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => Model.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Supplier.FantasyName)
+                </td>
+                <td>
+                    <a asp-action="Index" asp-controller="Supplier" class="btn btn-primary">
+                        <span class="fas fa-edit">Back</span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>    
+</div>

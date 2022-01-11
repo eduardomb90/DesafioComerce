@@ -1,0 +1,17 @@
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\net5.0\Application.Data.deps.json
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\net5.0\Application.Data.runtimeconfig.json
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\net5.0\Application.Data.runtimeconfig.dev.json
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\net5.0\Application.Data.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\net5.0\ref\Application.Data.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\net5.0\Application.Data.pdb
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\net5.0\Application.Domain.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\bin\Debug\net5.0\Application.Domain.pdb
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\Application.Data.csproj.AssemblyReference.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\Application.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\Application.Data.AssemblyInfoInputs.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\Application.Data.AssemblyInfo.cs
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\Application.Data.csproj.CoreCompileInputs.cache
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\Application.Data.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\ref\Application.Data.dll
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\Application.Data.pdb
+C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Data\obj\Debug\net5.0\Application.Data.genruntimeconfig.cache

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "44ti6yTNYjPtYm+4K32zPA0HpqffYo7cgoaCVSeZdtfHAih+VCuxPOvBZblVS801KVK+xhDZf9dAJOcwqiIm8A==",
+  "success": true,
+  "projectFilePath": "C:\\Codigos\\DesafioComerce\\CommerceApplication\\src\\Application.Domain\\Application.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\emarquba\\.nuget\\packages\\fluentvalidation\\10.3.6\\fluentvalidation.10.3.6.nupkg.sha512"
+  ],
+  "logs": []
+}

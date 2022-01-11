@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Application.Domain
+build_property.ProjectDir = C:\Codigos\DesafioComerce\CommerceApplication\src\Application.Domain\
